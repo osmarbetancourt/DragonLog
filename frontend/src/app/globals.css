@@ -1,3 +1,35 @@
+/* Old Charlotte Gothic Font */
+
+@font-face {
+  font-family: 'Old Charlotte';
+  src:
+    url('/fonts/old_charlotte/Old_Charlotte.woff') format('woff'),
+    url('/fonts/old_charlotte/Old_Charlotte.otf') format('opentype'),
+    url('/fonts/old_charlotte/Old_Charlotte.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-old-charlotte {
+  font-family: 'Old Charlotte', serif;
+}
+/* Cambridge Gothic Font */
+
+@font-face {
+  font-family: 'Cambridge';
+  src:
+    url('/fonts/cambridge-gothic/Cambridge.woff') format('woff'),
+    url('/fonts/cambridge-gothic/Cambridge.otf') format('opentype'),
+    url('/fonts/cambridge-gothic/Cambridge.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-cambridge {
+  font-family: 'Cambridge', serif;
+}
 @import "tailwindcss";
 
 :root {
