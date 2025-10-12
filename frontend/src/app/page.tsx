@@ -4,6 +4,7 @@ import AmbientEffects from "./components/AmbientEffects";
 import BookPortal from "./components/BookPortal";
 import LandingShowcase from "./components/LandingShowcase";
 import TransitionVeil from "./components/TransitionVeil";
+import CursorRuneTrail from "./components/CursorRuneTrail";
 
 type ExperiencePhase = "book" | "transition" | "landing";
 
@@ -13,6 +14,7 @@ export default function Page() {
 
   return (
     <main className="experience-shell">
+      <CursorRuneTrail />
       <style>{`
         .experience-shell {
           position: relative;

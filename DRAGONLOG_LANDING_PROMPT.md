@@ -19,6 +19,14 @@ We are building the landing page for **DragonLog** (domain: [thydragonlog.com](h
 
 ---
 
+## Recent Enhancements
+
+- Scroll-triggered fade-and-lift reveals now enliven feature runes, tech pillars, and badges once they cross the observer’s gaze.
+- The ruined causeway banner scales grandly on ultrawide keeps and bears a canvas ember fog tied to the portal’s ambience.
+- Particle ambience, parallax battlements, and hero entrance timing were tuned for both desktop battlements and scrying mirrors of small width.
+
+---
+
 ## Tech Stack Recommendation
 
 - **Framework:** Next.js (React)
@@ -188,18 +196,18 @@ We are building the landing page for **DragonLog** (domain: [thydragonlog.com](h
 
 ## Summary Checklist
 
-- [ ] Use Next.js for main framework (or SvelteKit for advanced animation)
-- [ ] Implement parallax scrolling backgrounds
-- [ ] Add particle FX: embers, fog, ash
+- [x] Use Next.js for main framework (or SvelteKit for advanced animation)
+- [x] Implement parallax scrolling backgrounds
+- [x] Add particle FX: embers, fog, ash
 - [ ] Animate dragon (SVG or 3D)
 - [ ] Dynamic lighting (flicker, glow, runes)
-- [ ] Gothic/fantasy fonts throughout
-- [ ] Animated entrance/reveal for all main content
+- [x] Gothic/fantasy fonts throughout
+- [x] Animated entrance/reveal for all main content
 - [ ] Custom cursor
 - [ ] Optional: subtle ambient sound/music
-- [ ] All copy in Old English, dark fantasy tone
-- [ ] Slogan: “Let none log escape thy dragon’s gaze”
-- [ ] Links, lore, and open source call to action
+- [x] All copy in Old English, dark fantasy tone
+- [x] Slogan: “Let none log escape thy dragon’s gaze”
+- [x] Links, lore, and open source call to action
 
 ---
 
