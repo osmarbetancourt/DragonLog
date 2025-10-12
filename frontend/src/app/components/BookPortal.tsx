@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import * as THREE from "three";
 
 type BookPortalProps = {
   onAscend: () => void;
@@ -11,6 +12,11 @@ type Passage = {
   paragraphs: string[];
   ctaLabel?: string;
   ctaSubtext?: string;
+  illustration?: {
+    src: string;
+    alt: string;
+    caption: string;
+  };
 };
 
 const LEFT_PAGE_CONTENT = {
@@ -29,6 +35,11 @@ const RIGHT_PAGE_PASSAGES: Passage[] = [
       "At moonrise the sentinels kindle braziers of audit and bind the wild logs.",
       "Glyphs of latency glimmer, guiding weary stewards through the mist of failing nodes.",
     ],
+    illustration: {
+      src: "/DragonLogSvgs/ruined_castle.svg",
+      alt: "Ruined castle beneath the dragon's watch",
+      caption: "Ruins kept beneath the dragon's ward",
+    },
   },
   {
     title: "Whispers of Ember",
@@ -36,6 +47,11 @@ const RIGHT_PAGE_PASSAGES: Passage[] = [
       "When the forges roar and queues grow fierce, heed the crimson rune.",
       "It speaketh of surging flame within the pipelines, begging for tempered vigilance.",
     ],
+    illustration: {
+      src: "/DragonLogSvgs/knight_fire_1.svg",
+      alt: "Knight tending a fire in the data sanctum",
+      caption: "The sentinel kindles the audit flame",
+    },
   },
   {
     title: "Oath of Binding",
@@ -43,6 +59,11 @@ const RIGHT_PAGE_PASSAGES: Passage[] = [
       "Swear upon these leaves to guard thy realms with diligence and grace.",
       "For every insight harvested, the dragon bestoweth clarity above the din.",
     ],
+    illustration: {
+      src: "/DragonLogSvgs/mountain.svg",
+      alt: "Mountain citadel forged of telemetry",
+      caption: "Signal peaks whisper from obsidian heights",
+    },
   },
   {
     title: "The Portal Awaits",
@@ -66,6 +87,8 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
   const postSummonTimeoutRef = useRef<number | null>(null);
   const autoSummonTimeoutRef = useRef<number | null>(null);
   const countdownIntervalRef = useRef<number | null>(null);
+  const bookFogRef = useRef<HTMLDivElement | null>(null);
+  const vantaRef = useRef<{ destroy: () => void } | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -80,6 +103,43 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const mountFog = async () => {
+      if (!bookFogRef.current) return;
+      const module = await import("vanta/dist/vanta.fog.min");
+      if (cancelled || !bookFogRef.current) return;
+      const VANTA = module.default;
+      vantaRef.current = VANTA({
+        el: bookFogRef.current,
+        THREE,
+        mouseControls: true,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        highlightColor: 0xefd8aa,
+        midtoneColor: 0x5a2c1f,
+        lowlightColor: 0x110a1c,
+        baseColor: 0x08050f,
+        blurFactor: 0.65,
+        speed: 1.1,
+        zoom: 0.9,
+      });
+    };
+
+    mountFog();
+
+    return () => {
+      cancelled = true;
+      if (vantaRef.current) {
+        vantaRef.current.destroy();
+        vantaRef.current = null;
+      }
     };
   }, []);
 
@@ -248,6 +308,25 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
           align-items: center;
           min-height: 80vh;
           padding: clamp(12px, 5vw, 60px);
+          overflow: hidden;
+        }
+        .book-fog-layer {
+          position: absolute;
+          inset: clamp(-12%, -6vw, -3%);
+          z-index: 0;
+          opacity: 0.65;
+        }
+        .book-fog-layer::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 80%, rgba(32, 18, 48, 0.55) 0%, rgba(6, 4, 14, 0.95) 70%);
+          mix-blend-mode: screen;
+          pointer-events: none;
+        }
+        .book-portal > *:not(.book-fog-layer) {
+          position: relative;
+          z-index: 1;
         }
         .book {
           position: relative;
@@ -548,6 +627,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
           }
         }
       `}</style>
+      <div className="book-fog-layer" ref={bookFogRef}></div>
       <div
         className={
           "book" + (bookOpen ? " open" : "") + (portalSummoned ? " portal-summoned" : "")
@@ -614,18 +694,18 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
                       </small>
                     </div>
                   </div>
-                ) : (
+                ) : currentRightPassage.illustration ? (
                   <figure style={figureStyle}>
                     <img
-                      src="/images/ruined_castle.png"
-                      alt="Ruined castle under dragon vigil"
+                      src={currentRightPassage.illustration.src}
+                      alt={currentRightPassage.illustration.alt}
                       style={imageStyle}
                     />
                     <figcaption style={figcaptionStyle}>
-                      "Ruins kept beneath the dragon’s watch"
+                      {currentRightPassage.illustration.caption}
                     </figcaption>
                   </figure>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

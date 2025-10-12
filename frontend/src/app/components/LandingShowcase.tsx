@@ -21,6 +21,23 @@ const FEATURES = [
   },
 ];
 
+const TECH_PILLARS = [
+  {
+    name: "Next.js",
+    lore: "Frontend grimoire weaving portals and dashboards with server-borne speed.",
+  },
+  {
+    name: "Kafka",
+    lore: "Raven-black message streams ferry every whisper into the dragon's hoard.",
+  },
+  {
+    name: "Rust",
+    lore: "Forge-daemons compiled in iron oath ensure the pipeline never slumbers.",
+  },
+];
+
+const INTEGRATIONS = ["AWS", "Render", "Hetzner"];
+
 export default function LandingShowcase() {
   return (
     <div className="landing-canvas">
@@ -38,6 +55,29 @@ export default function LandingShowcase() {
           display: grid;
           gap: clamp(2.5rem, 6vw, 4rem);
           overflow: hidden;
+        }
+        .landing-hero-grid {
+          position: relative;
+          display: grid;
+          grid-template-columns: minmax(120px, 220px) 1fr;
+          gap: clamp(1.75rem, 4vw, 3rem);
+          align-items: start;
+        }
+        .landing-logo-placeholder {
+          position: relative;
+          width: clamp(140px, 22vw, 220px);
+          height: clamp(140px, 22vw, 220px);
+          border-radius: 24px;
+          border: 1px dashed rgba(215,180,120,0.45);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: rgba(245,228,198,0.68);
+          background: linear-gradient(160deg, rgba(20,10,22,0.65), rgba(12,8,18,0.82));
+          box-shadow: 0 14px 32px rgba(0,0,0,0.35);
         }
         .landing-hero::before {
           content: "";
@@ -152,6 +192,89 @@ export default function LandingShowcase() {
           display: grid;
           gap: clamp(2rem, 6vw, 3rem);
         }
+        .product-summary {
+          position: relative;
+          display: grid;
+          grid-template-columns: minmax(260px, 1fr) minmax(260px, 440px);
+          gap: clamp(1.5rem, 5vw, 3rem);
+          padding: clamp(1.75rem, 5vw, 3rem);
+          border-radius: 28px;
+          background:
+            linear-gradient(145deg, rgba(34,20,40,0.95), rgba(18,12,28,0.92)) padding-box,
+            linear-gradient(155deg, rgba(210,160,120,0.35), rgba(95,70,110,0.25)) border-box;
+          border: 1px solid transparent;
+          box-shadow: 0 22px 44px rgba(0,0,0,0.36);
+          overflow: hidden;
+        }
+        .product-summary > * {
+          position: relative;
+          z-index: 1;
+        }
+        .product-summary::after {
+          content: "";
+          position: absolute;
+          inset: 12px;
+          border-radius: 22px;
+          pointer-events: none;
+          background: linear-gradient(160deg, rgba(210,160,120,0.12), rgba(60,35,65,0.08));
+          opacity: 0.7;
+        }
+        .landing-product {
+          position: relative;
+          aspect-ratio: 16 / 10;
+          border-radius: 16px;
+          overflow: hidden;
+          background: radial-gradient(circle at 55% 40%, rgba(230,200,155,0.18), rgba(15,8,20,0.92));
+          border: 1px solid rgba(210,160,120,0.28);
+          box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+        }
+        .landing-product::before {
+          content: "";
+          position: absolute;
+          inset: 24px;
+          border-radius: 12px;
+          border: 1px dashed rgba(210,160,120,0.35);
+        }
+        .landing-product::after {
+          content: "Product realm placeholder";
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Old Charlotte', serif;
+          letter-spacing: 0.06em;
+          font-size: clamp(1rem, 1.8vw, 1.35rem);
+          color: rgba(245,228,198,0.7);
+          text-align: center;
+          padding: 0 3rem;
+        }
+        .product-copy {
+          position: relative;
+          display: grid;
+          gap: 1.2rem;
+          align-content: center;
+        }
+        .product-copy h3 {
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+        }
+        .product-copy p {
+          color: rgba(247,232,214,0.86);
+          line-height: 1.8;
+          font-size: clamp(0.98rem, 1.9vw, 1.15rem);
+        }
+        .product-copy ul {
+          margin: 0;
+          padding-left: 1.1rem;
+          display: grid;
+          gap: 0.4rem;
+          color: rgba(244,225,194,0.8);
+          font-size: clamp(0.95rem, 1.7vw, 1.1rem);
+          list-style: square;
+        }
         .landing-features-header {
           display: flex;
           flex-direction: column;
@@ -206,6 +329,90 @@ export default function LandingShowcase() {
           color: rgba(246,228,204,0.82);
           line-height: 1.75;
           font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+        }
+        .tech-stack {
+          position: relative;
+          padding: clamp(3.5rem, 9vw, 6.5rem) clamp(1.5rem, 8vw, 6rem) clamp(4rem, 10vw, 6.5rem);
+          display: grid;
+          gap: clamp(2rem, 5vw, 3rem);
+        }
+        .tech-stack::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 20% 10%, rgba(138,72,34,0.35), rgba(10,6,12,0.95) 70%);
+          pointer-events: none;
+        }
+        .tech-stack-header {
+          position: relative;
+          display: grid;
+          gap: 1rem;
+          max-width: 720px;
+        }
+        .tech-stack-header h2 {
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+        }
+        .tech-stack-header p {
+          color: rgba(246,228,204,0.85);
+          line-height: 1.8;
+          font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+        .tech-pillars {
+          position: relative;
+          display: grid;
+          gap: clamp(1.4rem, 4vw, 2.2rem);
+          grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+        .tech-card {
+          position: relative;
+          border-radius: clamp(14px, 3vw, 20px);
+          padding: clamp(1.4rem, 4vw, 2rem);
+          background: linear-gradient(150deg, rgba(24,16,30,0.88), rgba(12,8,18,0.94));
+          border: 1px solid rgba(210,170,110,0.26);
+          box-shadow: 0 18px 36px rgba(0,0,0,0.34);
+        }
+        .tech-card::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at top, rgba(210,160,120,0.18), transparent 65%);
+          opacity: 0.75;
+        }
+        .tech-card-content {
+          position: relative;
+          display: grid;
+          gap: 0.8rem;
+        }
+        .tech-card h3 {
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+        }
+        .tech-card p {
+          color: rgba(245,228,204,0.82);
+          line-height: 1.75;
+          font-size: clamp(0.96rem, 1.9vw, 1.12rem);
+        }
+        .integration-badges {
+          position: relative;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+        }
+        .integration-badge {
+          border-radius: 999px;
+          padding: 0.55rem 1.6rem;
+          border: 1px solid rgba(215,180,120,0.32);
+          background: rgba(18,12,26,0.8);
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: rgba(245,228,204,0.78);
+          box-shadow: 0 10px 24px rgba(0,0,0,0.3);
         }
         .landing-lore {
           padding: clamp(3rem, 9vw, 6rem) clamp(1.5rem, 8vw, 6rem) clamp(5rem, 10vw, 7rem);
@@ -270,8 +477,28 @@ export default function LandingShowcase() {
           to { transform: translate3d(2%, 0, 0) scale(1.1); }
         }
         @media (max-width: 768px) {
+          .landing-hero-grid {
+            grid-template-columns: 1fr;
+          }
+          .landing-logo-placeholder {
+            width: clamp(120px, 40vw, 160px);
+            height: clamp(120px, 40vw, 160px);
+            justify-self: center;
+          }
+          .product-summary {
+            grid-template-columns: 1fr;
+          }
+          .landing-product {
+            order: 2;
+          }
+          .product-copy {
+            order: 1;
+          }
           .landing-parallax {
             margin: 0 1.25rem;
+          }
+          .integration-badges {
+            justify-content: center;
           }
           .landing-feature-card {
             text-align: left;
@@ -280,17 +507,38 @@ export default function LandingShowcase() {
       `}</style>
 
       <section className="landing-hero">
-        <h1>DragonLog Keepeth Vigil Eternal</h1>
-        <p>
-          From the first ember of deployment to the last ash of failure, DragonLog guardeth every
-          whisper. Enter the sanctum and witness telemetry wrought in obsidian, powered by open source
-          flame.
-        </p>
-        <div className="landing-hero-actions">
-          <a className="primary" href="#summon-vigil">Begin Thy Vigil</a>
-          <a className="secondary" href="https://github.com/osmarbetancourt/DragonLog" target="_blank" rel="noreferrer">
-            View the Codex
-          </a>
+        <div className="landing-hero-grid">
+          <div className="landing-logo-placeholder">DragonLog Sigil</div>
+          <div className="landing-hero-content">
+            <h1>DragonLog Keepeth Vigil Eternal</h1>
+            <p>
+              From the first ember of deployment to the last ash of failure, DragonLog guardeth every
+              whisper. Enter the sanctum and witness telemetry wrought in obsidian, powered by open
+              source flame.
+            </p>
+            <div className="landing-hero-actions">
+              <a className="primary" href="#summon-vigil">Begin Thy Vigil</a>
+              <a className="secondary" href="https://github.com/osmarbetancourt/DragonLog" target="_blank" rel="noreferrer">
+                View the Codex
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="product-summary">
+          <div className="landing-product" aria-hidden="true"></div>
+          <div className="product-copy">
+            <h3>Future Vigilant Console</h3>
+            <p>
+              Here the command console unfurls—dashboards, rune-fed alerts, and shard inventories drawn
+              beneath the dragon&apos;s wing. The frame awaiteth live glyphs, yet the promise is etched in
+              embers.
+            </p>
+            <ul>
+              <li>Summon service pulsars and tail rituals in a single obsidian pane.</li>
+              <li>Bind deployments to autonomous sentries that scry Kafka and flame-forged streams.</li>
+              <li>Carve integrations unto cloud bastions for swift redeploy and recovery.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -315,6 +563,31 @@ export default function LandingShowcase() {
               <h3>{feature.title}</h3>
               <p>{feature.description}</p>
             </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="tech-stack">
+        <div className="tech-stack-header">
+          <h2>Forge &amp; Conduits</h2>
+          <p>
+            DragonLog standeth upon a triad of grimoires: Next.js portals for the watchkeepers, Kafka
+            ravens ferrying tidings, and Rust-bound daemons hammering resilience into every circuit.
+          </p>
+        </div>
+        <div className="tech-pillars">
+          {TECH_PILLARS.map(pillar => (
+            <article className="tech-card" key={pillar.name}>
+              <div className="tech-card-content">
+                <h3>{pillar.name}</h3>
+                <p>{pillar.lore}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="integration-badges" aria-label="Cloud integrations">
+          {INTEGRATIONS.map(name => (
+            <span className="integration-badge" key={name}>{name}</span>
           ))}
         </div>
       </section>

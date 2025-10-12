@@ -35,27 +35,13 @@ export default function Page() {
           padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
         }
         .experience-layer::before {
+          content: none;
+        }
+        .experience-layer--landing::before {
           content: "";
           position: absolute;
           inset: clamp(0.75rem, 2.5vw, 2.75rem);
           border-radius: clamp(36px, 8vw, 72px);
-          background: radial-gradient(
-            circle at 50% 45%,
-            rgba(255, 194, 120, 0.16) 0%,
-            rgba(115, 58, 30, 0.22) 38%,
-            rgba(12, 6, 18, 0.88) 100%
-          );
-          box-shadow: 0 0 68px rgba(255, 166, 90, 0.18);
-          opacity: 0;
-          transition: opacity 0.6s ease;
-          pointer-events: none;
-          z-index: -1;
-        }
-        .experience-layer--book::before {
-          opacity: 1;
-        }
-        .experience-layer--landing::before {
-          opacity: 0.45;
           background: radial-gradient(
             circle at 50% 30%,
             rgba(90, 120, 180, 0.12) 0%,
@@ -63,6 +49,8 @@ export default function Page() {
             rgba(8, 12, 26, 0.85) 100%
           );
           box-shadow: 0 0 80px rgba(120, 160, 255, 0.12);
+          pointer-events: none;
+          z-index: -1;
         }
         .debug-controls {
           position: fixed;
@@ -102,7 +90,7 @@ export default function Page() {
           </button>
         </div>
       ) : null}
-  <AmbientEffects phase={phase} />
+    <AmbientEffects phase={phase} />
       <div
         className={`experience-layer${
           phase === "book" ? " experience-layer--book" : ""
