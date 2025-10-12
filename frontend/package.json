@@ -9,9 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "gsap": "^3.13.0",
+    "locomotive-scroll": "^4.1.4",
     "next": "^15.5.4",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-scroll-parallax": "^3.5.0",
+    "simple-parallax-js": "^6.3.3",
+    "super-parallax": "github:Reyemneirda/super-parallax"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

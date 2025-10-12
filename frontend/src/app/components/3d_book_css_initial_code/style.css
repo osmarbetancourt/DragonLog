@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f0f0;
+}
+
+.book {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    /* Sets the 3D viewing distance */
+    perspective: 1500px; 
+    /* Ensures children (cover/pages) exist in 3D space */
+    transform-style: preserve-3d; 
+    /* Initial slight rotation for 3D view */
+    transform: rotateX(10deg); 
+}
+
+.cover, .back, .page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* All rotations will pivot from the left edge */
+    transform-origin: left; 
+    /* Apply transition for the hover effect */
+    transition: transform 0.8s ease-in-out;
+}
+
+/* --- Styling --- */
+.cover {
+    z-index: 10;
+    background: #2a3d4f; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.cover h1 {
+    font-size: 2.5em;
+    margin-bottom: 5px;
+}
+
+.cover h2 {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+
+.back {
+    background: #2a3d4f;
+    transform: rotateY(-180deg); 
+}
+
+.page {
+    background: #fff;
+    border: 1px solid #ccc;
+    z-index: 1; 
+}
+
+/* --- Hover (Open Book) Animation --- */
+
+.book:hover .cover {
+    /* Opens the cover wide */
+    transform: rotateY(-135deg); 
+}
+
+.book:hover .page-1 {
+    transform: rotateY(-130deg);
+    z-index: 9; /* Bring flipped page forward */
+}
+
+.book:hover .page-2 {
+    transform: rotateY(-125deg);
+    z-index: 8;
+}
+
+.book:hover .page-3 {
+    transform: rotateY(-120deg);
+    z-index: 7;
+}
+
+.book:hover .page-4 {
+    transform: rotateY(-115deg);
+    z-index: 6;
+}
+
+.book:hover .page-5 {
+    /* This page remains less rotated as it's closer to the back cover */
+    transform: rotateY(-110deg); 
+    z-index: 5;
+}
