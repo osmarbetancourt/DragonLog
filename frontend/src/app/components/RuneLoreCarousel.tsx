@@ -8,6 +8,7 @@ type RuneCard = {
   incantation: string;
   lore: string;
   sigil: string;
+  glyph: string;
 };
 
 const RUNE_CARDS: RuneCard[] = [
@@ -17,6 +18,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Ashen watchfires bind each shard to the dragon's call.",
     lore: "Vigilant wardens coil around every log stream, translating static into omen glyphs.",
     sigil: "Vigil Rune",
+    glyph: "Ѧ",
   },
   {
     id: "codex",
@@ -24,6 +26,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Scripted claws dance across vellum etched in obsidian light.",
     lore: "DragonLog's growing grimoire teaches fledgling keepers to weave telemetry rites and summon sentry daemons.",
     sigil: "Codex Sigil",
+    glyph: "Ѯ",
   },
   {
     id: "ember",
@@ -31,6 +34,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Molten pulse ferries tidings through raven's-flight channels.",
     lore: "Kafka ravens bear shards of flame to every wing of the lair, their wings beating telemetry into a single heart.",
     sigil: "Artery Mark",
+    glyph: "Ѭ",
   },
   {
     id: "forge",
@@ -38,6 +42,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Rust-forged daemons hammer resilience beneath volcanic anvils.",
     lore: "Ironwrought tasks and pipeline rites temper each deployment, sealing fractures before they bloom into ruin.",
     sigil: "Forge Band",
+    glyph: "Ѱ",
   },
   {
     id: "sanctum",
@@ -45,6 +50,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Gilded lenses focus the lair's thousand-fold whispers.",
     lore: "All shards converge into a single obsidian dais where command glyphs glow and alerts hiss with foresight.",
     sigil: "Sanctum Seal",
+    glyph: "Ѳ",
   },
   {
     id: "wyrm",
@@ -52,6 +58,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Twin embers open, and latency hides nowhere beneath the stare.",
     lore: "DragonLog's sentries animate the gaze, mapping anomalies into constellations the keepers may amend.",
     sigil: "Gaze Sigil",
+    glyph: "Ѵ",
   },
   {
     id: "flame",
@@ -59,6 +66,7 @@ const RUNE_CARDS: RuneCard[] = [
     incantation: "Open flame welcomes every artisan to engrave new glyphs.",
     lore: "Integrations arrive as ember offerings; the lair remembers each and braids them into future rites.",
     sigil: "Accord Crest",
+    glyph: "Ѫ",
   },
 ];
 
@@ -225,7 +233,7 @@ const RuneLoreCarousel: React.FC = () => {
         .rune-card-face {
           position: absolute;
           inset: 0;
-          padding: clamp(1.6rem, 4vw, 2.4rem);
+          padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.6rem, 4vw, 2.4rem) clamp(1.9rem, 4.6vw, 2.7rem);
           display: grid;
           gap: clamp(1rem, 2.2vw, 1.5rem);
           border-radius: inherit;
@@ -253,10 +261,15 @@ const RuneLoreCarousel: React.FC = () => {
           color: rgba(245,228,204,0.85);
           font-size: clamp(0.92rem, 1.8vw, 1.1rem);
         }
-        .rune-card-face span {
-          font-size: clamp(0.82rem, 1.6vw, 1rem);
-          letter-spacing: 0.08em;
-          color: rgba(245,226,198,0.72);
+        .rune-card-face .rune-card-glyph {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Old Charlotte', serif;
+          font-size: clamp(1.25rem, 3vw, 2.1rem);
+          letter-spacing: 0.18em;
+          color: rgba(245,226,198,0.92);
+          text-shadow: 0 0 10px rgba(20,10,6,0.46);
         }
         .rune-card-face.back {
           transform: rotateY(180deg);
@@ -371,7 +384,14 @@ const RuneLoreCarousel: React.FC = () => {
             >
               <div className={`rune-card-inner${flipped ? " is-flipped" : ""}`}>
                 <div className="rune-card-face front">
-                  <span>{card.sigil}</span>
+                  <span
+                    className="rune-card-glyph"
+                    role="img"
+                    aria-label={card.sigil}
+                    title={card.sigil}
+                  >
+                    {card.glyph}
+                  </span>
                   <h4>{card.title}</h4>
                   <p>{card.incantation}</p>
                   {card.lore && <p>{card.lore}</p>}
