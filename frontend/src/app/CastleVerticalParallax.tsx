@@ -1,6 +1,7 @@
 import type { ReactNode, RefObject } from "react";
 "use client";
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 
 const LORE = [
@@ -191,10 +192,13 @@ export default function CastleVerticalParallax() {
             left={
                 <div className="flex flex-col h-full w-full justify-center items-center">
                     <div className="text-3xl font-old-charlotte text-amber-900 mb-8 drop-shadow-lg">DragonLog Lore</div>
-                    <img
+                    <Image
                         src={LORE[0].img}
                         alt={LORE[0].text}
+                        width={220}
+                        height={220}
                         className="w-[220px] max-w-full h-auto mb-6 drop-shadow-xl rounded-lg border-2 border-amber-900 bg-zinc-900/30"
+                        sizes="(max-width: 768px) 70vw, 220px"
                     />
                     <div className="text-xl font-old-charlotte text-amber-900 text-center max-w-md drop-shadow-lg leading-relaxed">
                         {LORE[0].text}
@@ -206,10 +210,13 @@ export default function CastleVerticalParallax() {
                     <div className="flex flex-col gap-8">
                         {LORE.slice(1).map((section, i) => (
                             <div key={i} className="flex flex-col items-center">
-                                <img
+                                <Image
                                     src={section.img}
                                     alt={section.text}
+                                    width={140}
+                                    height={140}
                                     className="w-[140px] max-w-full h-auto mb-4 drop-shadow-xl rounded-lg border-2 border-amber-900 bg-zinc-900/30"
+                                    sizes="(max-width: 768px) 60vw, 140px"
                                 />
                                 <div className="text-lg font-old-charlotte text-amber-900 text-center max-w-md drop-shadow-lg leading-relaxed">
                                     {section.text}

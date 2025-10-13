@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import * as THREE from "three";
 import { startAmbient } from "../audio/ambientAudioManager";
 
@@ -552,7 +553,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
             align-items: center;
             justify-content: center;
           }
-          .portal-gate__image img {
+          .portal-gate__image-asset {
             width: 92%;
             height: 92%;
             object-fit: contain;
@@ -691,7 +692,15 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
                     >
                       <div className="portal-gate__aura"></div>
                       <div className="portal-gate__image">
-                        <img src="/images/portal.png" alt="DragonLog portal vortex" />
+                        <Image
+                          src="/images/portal.png"
+                          alt="DragonLog portal vortex"
+                          width={260}
+                          height={260}
+                          className="portal-gate__image-asset"
+                          sizes="(max-width: 768px) 40vw, 220px"
+                          priority
+                        />
                       </div>
                       <div className="portal-gate__glimmer"></div>
                     </div>
@@ -708,10 +717,13 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
                   </div>
                 ) : currentRightPassage.illustration ? (
                   <figure style={figureStyle}>
-                    <img
+                    <Image
                       src={currentRightPassage.illustration.src}
                       alt={currentRightPassage.illustration.alt}
+                      width={220}
+                      height={300}
                       style={imageStyle}
+                      sizes="(max-width: 540px) 70vw, 220px"
                     />
                     <figcaption style={figcaptionStyle}>
                       {currentRightPassage.illustration.caption}
