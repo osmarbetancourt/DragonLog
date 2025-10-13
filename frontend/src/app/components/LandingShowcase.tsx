@@ -1312,14 +1312,15 @@ export default function LandingShowcase() {
           }
           .landing-parallax {
             margin: 0;
-            aspect-ratio: 4 / 5;
-            height: clamp(300px, 82vw, 420px);
+            aspect-ratio: auto;
+            height: clamp(360px, 94vw, 560px);
             max-height: none;
           }
           .journey-banner {
             margin: clamp(2.5rem, 14vw, 3.5rem) 0;
             aspect-ratio: auto;
-            height: clamp(260px, 92vw, 360px);
+            min-height: clamp(380px, 108vw, 620px);
+            height: auto;
             max-height: none;
           }
           .journey-banner-content {
