@@ -113,9 +113,9 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
 
     const mountFog = async () => {
       if (!bookFogRef.current) return;
-      const module = await import("vanta/dist/vanta.fog.min");
-      if (cancelled || !bookFogRef.current) return;
-      const VANTA = module.default;
+    const vantaModule = await import("vanta/dist/vanta.fog.min");
+    if (cancelled || !bookFogRef.current) return;
+    const VANTA = vantaModule.default;
       vantaRef.current = VANTA({
         el: bookFogRef.current,
         THREE,

@@ -18,8 +18,10 @@ const geistMono = Geist_Mono({
 
 
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thydragonlog.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dragonlog.vercel.app"),
+  metadataBase: SITE_URL ? new URL(SITE_URL) : undefined,
   title: {
     default: "DragonLog — Vigilant Telemetry Grimoire",
     template: "%s | DragonLog",
@@ -27,15 +29,24 @@ export const metadata: Metadata = {
   description:
     "DragonLog keeps every shard under watch, weaving observability, alerting, and integrations into a living spellbook for your infrastructure.",
   icons: {
-    icon: "/images/DragonLog_icon_WBG.svg",
-    shortcut: "/images/DragonLog_icon_WBG.svg",
-    apple: "/images/DragonLog_icon_WBG.svg",
+    icon: [
+      { url: "/images/DragonLog_icon_WBG.svg" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: [
+      { url: "/images/DragonLog_icon_WBG.svg" },
+      { url: "/favicon.ico" },
+    ],
+    apple: [
+      { url: "/images/DragonLog_icon_WBG.svg" },
+      { url: "/apple-touch-icon.png" },
+    ],
   },
   openGraph: {
     title: "DragonLog — Vigilant Telemetry Grimoire",
     description:
       "Summon sentry daemons, chart anomalies, and unify pipelines inside the DragonLog observability keep.",
-    url: "https://dragonlog.vercel.app",
+  url: SITE_URL,
     siteName: "DragonLog",
     type: "website",
     images: [
@@ -50,7 +61,7 @@ export const metadata: Metadata = {
     title: "DragonLog — Vigilant Telemetry Grimoire",
     description:
       "Keep vigilant watch over logs, metrics, and integrations with the DragonLog observability spellbook.",
-    images: ["/images/DragonLog_icon_WBG.svg"],
+  images: ["/images/DragonLog_icon_WBG.svg"],
   },
   keywords: [
     "DragonLog",
