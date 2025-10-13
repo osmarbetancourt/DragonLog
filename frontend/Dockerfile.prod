@@ -1,0 +1,32 @@
+# Production Dockerfile for the DragonLog Next.js frontend
+FROM node:20-alpine
+WORKDIR /app
+
+# Build-time arguments that mirror the reference project
+ARG NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+# Install build tools similar to the development Dockerfile
+RUN apk add --no-cache python3 make g++
+
+# Install full dependency tree so TypeScript and other dev tools remain available for next start
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Copy application source and build
+COPY . .
+RUN npm run build
+
+# Prepare runtime permissions just like the reference Dockerfile
+RUN adduser -D app \
+	&& chown app:app /app \
+	&& chmod 775 /app \
+	&& mkdir -p /app/.next/cache \
+	&& chown -R app:app /app/.next
+
+USER app
+
+EXPOSE 3000
+CMD ["npm", "start"]
