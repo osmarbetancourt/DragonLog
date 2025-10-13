@@ -70,14 +70,16 @@ const RUNE_CARDS: RuneCard[] = [
   },
 ];
 
+const DEFAULT_RADIUS = 420;
+
 const RuneLoreCarousel: React.FC = () => {
   const baseAngle = 360 / RUNE_CARDS.length;
-  const radius = 420;
 
   const [rotation, setRotation] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [flippedState, setFlippedState] = useState<boolean[]>(() => RUNE_CARDS.map(() => true));
   const [isDragging, setIsDragging] = useState(false);
+  const [radius, setRadius] = useState(DEFAULT_RADIUS);
 
   const trackRef = useRef<HTMLDivElement | null>(null);
   const pointerState = useRef({
@@ -93,6 +95,21 @@ const RuneLoreCarousel: React.FC = () => {
     const value = rotation % 360;
     return value < 0 ? value + 360 : value;
   }, [rotation]);
+
+  useEffect(() => {
+    const updateRadius = () => {
+      if (typeof window === "undefined") {
+        return;
+      }
+    const width = window.innerWidth;
+    const nextRadius = width <= 420 ? 180 : width <= 520 ? 205 : width <= 640 ? 260 : DEFAULT_RADIUS;
+      setRadius(prev => (prev === nextRadius ? prev : nextRadius));
+    };
+
+    updateRadius();
+    window.addEventListener("resize", updateRadius);
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
 
   useEffect(() => {
     const rawIndex = Math.round(-rotation / baseAngle);
@@ -349,6 +366,54 @@ const RuneLoreCarousel: React.FC = () => {
           }
           .rune-carousel-track {
             width: clamp(240px, 72vw, 320px);
+          }
+        }
+        @media (max-width: 540px) {
+          .rune-carousel {
+            height: clamp(360px, 118vw, 520px);
+            padding: 1.4rem 0 2.4rem;
+          }
+          .rune-carousel-track {
+            width: min(60vw, 220px);
+          }
+          .rune-card-face {
+            padding: clamp(0.96rem, 4.6vw, 1.35rem) clamp(0.84rem, 4.4vw, 1.25rem) clamp(1.15rem, 5.4vw, 1.55rem);
+            gap: clamp(0.55rem, 3.4vw, 0.9rem);
+          }
+          .rune-card-face h4 {
+            font-size: clamp(0.92rem, 4vw, 1.18rem);
+            letter-spacing: 0.085em;
+          }
+          .rune-card-face p {
+            font-size: clamp(0.78rem, 3.4vw, 0.9rem);
+            line-height: 1.5;
+          }
+          .rune-card-face .rune-card-glyph {
+            font-size: clamp(0.98rem, 5vw, 1.56rem);
+            letter-spacing: 0.14em;
+          }
+          .rune-carousel-indicator {
+            bottom: clamp(1.25rem, 8vw, 1.9rem);
+            gap: clamp(0.24rem, 2vw, 0.4rem);
+          }
+          .rune-carousel-indicator span {
+            width: clamp(5px, 1.8vw, 7px);
+            height: clamp(5px, 1.8vw, 7px);
+          }
+        }
+        @media (max-width: 420px) {
+          .rune-carousel-track {
+            width: min(66vw, 198px);
+          }
+          .rune-card-face h4 {
+            font-size: clamp(0.88rem, 4.8vw, 1.12rem);
+          }
+          .rune-card-face p {
+            font-size: clamp(0.76rem, 3.8vw, 0.86rem);
+            line-height: 1.45;
+          }
+          .rune-card-face .rune-card-glyph {
+            font-size: clamp(0.94rem, 5.4vw, 1.46rem);
           }
         }
       `}</style>
