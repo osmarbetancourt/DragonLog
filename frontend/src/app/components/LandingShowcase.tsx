@@ -4,6 +4,7 @@ import React, { CSSProperties, useEffect, useRef } from "react";
 
 import AmbientAudioToggle from "./AmbientAudioToggle";
 import RuneDecodeText from "./RuneDecodeText";
+import RuneLoreCarousel from "./RuneLoreCarousel";
 
 const FEATURES = [
   {
@@ -294,7 +295,7 @@ export default function LandingShowcase() {
           overflow: hidden;
         }
         .scroll-reveal {
-          opacity: 0;
+          opacity: 1;
           transform: translate3d(0, var(--reveal-translate, 32px), 0) scale(var(--reveal-scale, 0.98));
           transition: opacity 0.8s ease, transform 0.8s ease;
           will-change: opacity, transform;
@@ -472,12 +473,21 @@ export default function LandingShowcase() {
           background: rgba(26,18,36,0.9);
           box-shadow: 0 12px 26px rgba(172,120,72,0.25);
         }
+        .vision-gallery {
+          display: grid;
+          gap: clamp(2.8rem, 7vw, 4rem);
+          margin: clamp(3rem, 9vw, 5.5rem) auto;
+          padding: 0 clamp(1.5rem, 7vw, 5.5rem);
+          max-width: min(1120px, 92vw);
+        }
         .landing-parallax {
           position: relative;
           overflow: hidden;
-          aspect-ratio: 17 / 15;
-          min-height: clamp(360px, 42vw, 760px);
-          margin: 0 clamp(1.5rem, 8vw, 6rem);
+          aspect-ratio: 5 / 4;
+          height: clamp(420px, 70vw, 980px);
+          max-height: 980px;
+          width: 100%;
+          margin: 0 auto;
           border-radius: clamp(16px, 4vw, 32px);
           border: 1px solid rgba(215,180,120,0.32);
           background: linear-gradient(180deg, rgba(18,12,24,0.95) 0%, rgba(8,4,12,0.85) 100%);
@@ -485,11 +495,13 @@ export default function LandingShowcase() {
         }
         .journey-banner {
           position: relative;
-          margin: clamp(3rem, 9vw, 5.5rem) clamp(1.5rem, 8vw, 6rem);
+          margin: 0 auto;
           border-radius: clamp(18px, 4vw, 28px);
           overflow: hidden;
-          aspect-ratio: 1 / 1;
-          min-height: clamp(480px, 60vw, 960px);
+          aspect-ratio: 5 / 4;
+          height: clamp(440px, 72vw, 980px);
+          max-height: 980px;
+          width: 100%;
           border: 1px solid rgba(215,180,120,0.32);
           box-shadow: 0 22px 48px rgba(0,0,0,0.45);
         }
@@ -654,35 +666,84 @@ export default function LandingShowcase() {
           background: linear-gradient(160deg, rgba(210,160,120,0.12), rgba(60,35,65,0.08));
           opacity: 0.7;
         }
-        .landing-product {
+        .product-visual {
           position: relative;
-          aspect-ratio: 16 / 10;
-          border-radius: 16px;
+          display: grid;
+          align-content: center;
+          justify-items: center;
+          min-height: clamp(280px, 32vw, 360px);
+          padding: clamp(1.6rem, 4.5vw, 2.4rem);
+          border-radius: 24px;
+          background:
+            radial-gradient(circle at 28% 18%, rgba(255,190,132,0.22), transparent 58%),
+            radial-gradient(circle at 72% 76%, rgba(145,82,42,0.18), transparent 65%),
+            linear-gradient(160deg, rgba(32,18,38,0.96), rgba(18,12,26,0.94));
+          border: 1px solid rgba(212,170,128,0.42);
+          box-shadow: 0 24px 48px rgba(0,0,0,0.38);
           overflow: hidden;
-          background: radial-gradient(circle at 55% 40%, rgba(230,200,155,0.18), rgba(15,8,20,0.92));
-          border: 1px solid rgba(210,160,120,0.28);
-          box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+          max-width: clamp(280px, 30vw, 360px);
         }
-        .landing-product::before {
+        .product-visual::before {
           content: "";
           position: absolute;
-          inset: 24px;
-          border-radius: 12px;
-          border: 1px dashed rgba(210,160,120,0.35);
+          inset: -20% -25%;
+          background: radial-gradient(circle, rgba(255,226,186,0.12), rgba(34,20,40,0) 68%);
+          transform: rotate(18deg);
+          animation: consoleGlow 12s ease-in-out infinite;
+          pointer-events: none;
         }
-        .landing-product::after {
-          content: "Product realm placeholder";
+        .product-visual::after {
+          content: "";
           position: absolute;
-          inset: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-family: 'Old Charlotte', serif;
-          letter-spacing: 0.06em;
-          font-size: clamp(1rem, 1.8vw, 1.35rem);
-          color: rgba(245,228,198,0.7);
-          text-align: center;
-          padding: 0 3rem;
+          inset: 12%;
+          border-radius: 18px;
+          border: 1px solid rgba(255,226,186,0.25);
+          opacity: 0.7;
+          pointer-events: none;
+        }
+        .product-visual-inner {
+          position: relative;
+          display: grid;
+          gap: clamp(0.7rem, 2vw, 1rem);
+          width: 100%;
+        }
+        .product-visual-holo {
+          display: block;
+          height: clamp(10px, 1.4vw, 14px);
+          border-radius: 999px;
+          background: linear-gradient(90deg, rgba(255,212,162,0.85), rgba(190,102,48,0.55));
+          box-shadow: 0 0 16px rgba(255,190,120,0.4);
+          opacity: 0.85;
+        }
+        .product-visual-holo--wide {
+          height: clamp(16px, 2vw, 20px);
+          background: linear-gradient(90deg, rgba(255,230,192,0.85), rgba(158,82,42,0.65));
+        }
+        .product-visual-holo--accent {
+          background: linear-gradient(90deg, rgba(120,186,255,0.65), rgba(48,132,210,0.35));
+          box-shadow: 0 0 18px rgba(98,176,255,0.35);
+        }
+        .product-visual-glyphs {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: clamp(0.45rem, 1.3vw, 0.85rem);
+          margin-top: clamp(0.2rem, 1vw, 0.5rem);
+        }
+        .product-visual-glyphs span {
+          display: block;
+          height: clamp(46px, 8vw, 68px);
+          border-radius: clamp(12px, 2.4vw, 18px);
+          background: linear-gradient(140deg, rgba(16,10,22,0.9), rgba(30,18,36,0.92));
+          border: 1px solid rgba(226,196,156,0.28);
+          box-shadow: inset 0 0 18px rgba(255,206,160,0.08);
+        }
+        .product-visual-spectrum {
+          display: block;
+          height: clamp(8px, 1vw, 10px);
+          border-radius: 999px;
+          background: linear-gradient(90deg, rgba(136,88,210,0.6), rgba(255,210,150,0.9), rgba(136,88,210,0.6));
+          box-shadow: 0 0 14px rgba(210,168,255,0.38);
+          animation: spectrumPulse 6.5s ease-in-out infinite;
         }
         .product-copy {
           position: relative;
@@ -894,6 +955,56 @@ export default function LandingShowcase() {
           background: radial-gradient(circle at center, rgba(45,26,18,0.45) 0%, rgba(10,6,12,0.95) 70%);
           pointer-events: none;
         }
+        .rune-archive {
+          position: relative;
+          padding: clamp(3.4rem, 9vw, 5.8rem) clamp(1.5rem, 8vw, 6rem) clamp(3.6rem, 9vw, 6rem);
+          display: grid;
+          justify-items: center;
+        }
+        .rune-archive::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 58% 18%, rgba(180,96,54,0.26), rgba(12,6,14,0.94) 70%);
+          pointer-events: none;
+        }
+        .rune-archive-shell {
+          position: relative;
+          width: 100%;
+          max-width: 1180px;
+          padding: clamp(2.6rem, 7vw, 3.8rem) clamp(1.8rem, 7vw, 3.4rem) clamp(2.4rem, 6vw, 3.4rem);
+          border-radius: 26px;
+          border: 1px solid rgba(215,180,130,0.4);
+          background:
+            linear-gradient(155deg, rgba(30,16,26,0.92), rgba(14,8,18,0.96)) padding-box,
+            linear-gradient(145deg, rgba(255,216,170,0.28), rgba(90,54,96,0.2)) border-box;
+          box-shadow: 0 26px 56px rgba(0,0,0,0.42);
+          display: grid;
+          gap: clamp(1.8rem, 4vw, 2.6rem);
+        }
+        .rune-archive-shell h2 {
+          font-family: 'Old Charlotte', serif;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          font-size: clamp(1.9rem, 4vw, 2.9rem);
+          margin: 0;
+          text-align: center;
+        }
+        .rune-archive-shell > p {
+          margin: 0 auto;
+          max-width: 720px;
+          text-align: center;
+          color: rgba(245,228,204,0.84);
+          line-height: 1.8;
+          font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+        .rune-archive-hint {
+          justify-self: center;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          font-size: clamp(0.82rem, 1.4vw, 0.98rem);
+          color: rgba(240,214,180,0.72);
+        }
         .cta-gallery {
           position: relative;
           padding: clamp(3.5rem, 9vw, 5.5rem) clamp(1.5rem, 8vw, 6rem) clamp(4.5rem, 10vw, 6.5rem);
@@ -1004,8 +1115,6 @@ export default function LandingShowcase() {
           background: linear-gradient(160deg, rgba(18,12,24,0.88), rgba(12,9,16,0.92));
           box-shadow: 0 20px 48px rgba(0,0,0,0.4);
           overflow: hidden;
-          clip-path: inset(45% 0 45% 0);
-          transition: clip-path 1.1s ease-in-out;
         }
         .lore-panel::before,
         .lore-panel::after {
@@ -1024,9 +1133,6 @@ export default function LandingShowcase() {
         .lore-panel::after {
           bottom: 0;
           transform: scaleY(-1);
-        }
-        .lore-panel.reveal-visible {
-          clip-path: inset(0 0 0 0);
         }
         .lore-panel.reveal-visible::before,
         .lore-panel.reveal-visible::after {
@@ -1087,6 +1193,15 @@ export default function LandingShowcase() {
           color: rgba(24,12,6,0.92);
           box-shadow: 0 18px 40px rgba(255,198,130,0.35);
         }
+        @keyframes consoleGlow {
+          0% { opacity: 0.4; transform: rotate(16deg) scale(1); }
+          50% { opacity: 0.75; transform: rotate(18deg) scale(1.06); }
+          100% { opacity: 0.4; transform: rotate(16deg) scale(1); }
+        }
+        @keyframes spectrumPulse {
+          0%, 100% { opacity: 0.55; box-shadow: 0 0 14px rgba(210,168,255,0.32); }
+          50% { opacity: 1; box-shadow: 0 0 22px rgba(255,210,180,0.52); }
+        }
         @keyframes heroPulse {
           0% { opacity: 0.65; transform: rotate(16deg) scale(1); }
           50% { opacity: 0.9; transform: rotate(12deg) scale(1.12); }
@@ -1136,7 +1251,26 @@ export default function LandingShowcase() {
           40% { opacity: 0.38; }
           100% { opacity: 0.22; }
         }
+        @keyframes loreUnroll {
+          0% {
+            opacity: 0;
+            transform: translateY(28px);
+            clip-path: inset(48% 0 48% 0);
+          }
+          55% {
+            clip-path: inset(14% 0 14% 0);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+            clip-path: inset(0 0 0 0);
+          }
+        }
         @media (max-width: 768px) {
+          .vision-gallery {
+            padding: 0 1.25rem;
+            margin: clamp(2.5rem, 12vw, 3.5rem) 0;
+          }
           .landing-hero {
             padding: clamp(3.2rem, 12vw, 4.5rem) 1.5rem clamp(2.6rem, 12vw, 4.2rem);
             text-align: center;
@@ -1168,21 +1302,25 @@ export default function LandingShowcase() {
           .product-summary {
             grid-template-columns: 1fr;
           }
-          .landing-product {
-            order: 2;
-          }
           .product-copy {
             order: 1;
           }
+          .product-visual {
+            order: 2;
+            max-width: min(82vw, 360px);
+            width: 100%;
+          }
           .landing-parallax {
-            margin: 0 1.25rem;
+            margin: 0;
             aspect-ratio: 4 / 5;
-            min-height: clamp(300px, 82vw, 420px);
+            height: clamp(300px, 82vw, 420px);
+            max-height: none;
           }
           .journey-banner {
-            margin: clamp(2.5rem, 14vw, 3.5rem) 1.25rem;
+            margin: clamp(2.5rem, 14vw, 3.5rem) 0;
             aspect-ratio: auto;
-            min-height: clamp(240px, 90vw, 360px);
+            height: clamp(260px, 92vw, 360px);
+            max-height: none;
           }
           .journey-banner-content {
             align-items: center;
@@ -1221,6 +1359,12 @@ export default function LandingShowcase() {
           .cta-card a {
             justify-self: center;
           }
+          .rune-archive {
+            padding: clamp(2.6rem, 12vw, 4rem) 1.5rem clamp(3rem, 12vw, 4.5rem);
+          }
+          .rune-archive-shell {
+            padding: clamp(2rem, 10vw, 2.8rem) clamp(1.4rem, 8vw, 2rem);
+          }
         }
         @media (max-width: 520px) {
           .landing-hero h1 {
@@ -1243,19 +1387,22 @@ export default function LandingShowcase() {
           }
         }
         @media (min-width: 1200px) {
-          .landing-parallax {
-            min-height: clamp(480px, 38vw, 840px);
-          }
-          .journey-banner {
-            min-height: clamp(560px, 42vw, 960px);
+          .vision-gallery {
+            max-width: min(1320px, 86vw);
           }
         }
-        @media (min-width: 1600px) {
-          .landing-parallax {
-            min-height: clamp(580px, 34vw, 980px);
+        @media (min-width: 1500px) {
+          .vision-gallery {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(2.4rem, 4vw, 4rem);
+            max-width: min(2440px, 92vw);
+            padding: 0 clamp(2rem, 4vw, 4rem);
           }
-          .journey-banner {
-            min-height: clamp(640px, 36vw, 1100px);
+          .vision-gallery .landing-parallax,
+          .vision-gallery .journey-banner {
+            margin: 0;
+            height: clamp(520px, 40vw, 980px);
+            max-height: 980px;
           }
         }
       `}</style>
@@ -1301,7 +1448,19 @@ export default function LandingShowcase() {
           </div>
         </div>
         <div className="product-summary">
-          <div className="landing-product" aria-hidden="true"></div>
+          <div className="product-visual" aria-hidden="true">
+            <div className="product-visual-inner">
+              <span className="product-visual-holo product-visual-holo--wide"></span>
+              <span className="product-visual-holo"></span>
+              <span className="product-visual-holo product-visual-holo--accent"></span>
+              <div className="product-visual-glyphs">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <span className="product-visual-spectrum"></span>
+            </div>
+          </div>
           <div className="product-copy">
             <h3>Future Vigilant Console</h3>
             <p>
@@ -1318,48 +1477,50 @@ export default function LandingShowcase() {
         </div>
       </section>
 
-      <section className="landing-parallax scroll-reveal reveal-delay-1" aria-hidden="true" data-scroll-reveal>
-        <div className="parallax-layer back"></div>
-        <div className="parallax-layer mid"></div>
-        <div className="parallax-layer front"></div>
-        <div className="landing-parallax-overlay"></div>
-      </section>
+      <div className="vision-gallery">
+        <section className="landing-parallax scroll-reveal reveal-delay-1" aria-hidden="true" data-scroll-reveal>
+          <div className="parallax-layer back"></div>
+          <div className="parallax-layer mid"></div>
+          <div className="parallax-layer front"></div>
+          <div className="landing-parallax-overlay"></div>
+        </section>
 
-      <section
-        className="journey-banner scroll-reveal reveal-delay-2"
-        data-scroll-reveal
-        ref={journeyBannerRef}
-      >
-        <div className="journey-banner-content">
-          <h3>Step Through the Ruined Causeway</h3>
-          <p>
-            The portal delivereth thee unto a blasted approach where the dragon&apos;s keep looms. Let this
-            vision be the omen of dashboards yet to breathe—summon the journey and vow the vigil.
-          </p>
-          <a href="#summon-vigil" data-rune-reactive="true">Witness the Vigil</a>
-        </div>
-        <div className="journey-fog" aria-hidden="true">
-          <canvas ref={journeyCanvasRef} />
-        </div>
-        <div className="journey-particles" aria-hidden="true">
-          {JOURNEY_PARTICLES.map((particle, index) => (
-            <span
-              key={`journey-particle-${index}`}
-              className="journey-particle"
-              style={{
-                top: particle.top,
-                left: particle.left,
-                // Inline custom properties typed via CSSVariables interface below.
-                ...({
-                  "--journey-duration": particle.duration,
-                  "--journey-delay": particle.delay,
-                  "--journey-scale": particle.scale,
-                } as CSSVariables),
-              }}
-            />
-          ))}
-        </div>
-      </section>
+        <section
+          className="journey-banner scroll-reveal reveal-delay-2"
+          data-scroll-reveal
+          ref={journeyBannerRef}
+        >
+          <div className="journey-banner-content">
+            <h3>Step Through the Ruined Causeway</h3>
+            <p>
+              The portal delivereth thee unto a blasted approach where the dragon&apos;s keep looms. Let this
+              vision be the omen of dashboards yet to breathe—summon the journey and vow the vigil.
+            </p>
+            <a href="#summon-vigil" data-rune-reactive="true">Witness the Vigil</a>
+          </div>
+          <div className="journey-fog" aria-hidden="true">
+            <canvas ref={journeyCanvasRef} />
+          </div>
+          <div className="journey-particles" aria-hidden="true">
+            {JOURNEY_PARTICLES.map((particle, index) => (
+              <span
+                key={`journey-particle-${index}`}
+                className="journey-particle"
+                style={{
+                  top: particle.top,
+                  left: particle.left,
+                  // Inline custom properties typed via CSSVariables interface below.
+                  ...({
+                    "--journey-duration": particle.duration,
+                    "--journey-delay": particle.delay,
+                    "--journey-scale": particle.scale,
+                  } as CSSVariables),
+                }}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
 
       <section className="landing-features" id="summon-vigil" data-scroll-reveal>
         <div className="landing-features-header">
@@ -1479,7 +1640,7 @@ export default function LandingShowcase() {
       </section>
 
       <section className="landing-lore" data-scroll-reveal>
-        <article className="lore-panel scroll-reveal" data-scroll-reveal>
+        <article className="lore-panel scroll-reveal reveal-visible" data-scroll-reveal>
           <h3>The Chronicle of Flame</h3>
           <p>
             In the age of splintered services, when signals perished in shadow, DragonLog arose as the
@@ -1488,6 +1649,18 @@ export default function LandingShowcase() {
             the dragon’s gaze.
           </p>
         </article>
+      </section>
+
+      <section className="rune-archive scroll-reveal" data-scroll-reveal>
+        <div className="rune-archive-shell">
+          <h2>Rune Archive of Vigil</h2>
+          <p>
+            Drag the ring of inscribed sigils, then flip each tablet to reveal the rites that bind
+            DragonLog&apos;s keepers. The archive slumbers near the ramparts, awaiting curious hands.
+          </p>
+          <RuneLoreCarousel />
+          <p className="rune-archive-hint">Drag to orbit. Tap or press enter to unseal.</p>
+        </div>
       </section>
 
       <footer className="landing-footer">
