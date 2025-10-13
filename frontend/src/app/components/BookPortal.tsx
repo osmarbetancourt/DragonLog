@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { startAmbient } from "../audio/ambientAudioManager";
 
 type BookPortalProps = {
   onAscend: () => void;
@@ -66,7 +67,7 @@ const RIGHT_PAGE_PASSAGES: Passage[] = [
     },
   },
   {
-    title: "The Portal Awaits",
+    title: "The Portal",
     paragraphs: [
       "Thy study of lore draweth near its end, yet a grander vigil beckons beyond.",
       "Step through the dragon’s seal and let the embers unveil the apparatus of mastery.",
@@ -89,6 +90,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
   const countdownIntervalRef = useRef<number | null>(null);
   const bookFogRef = useRef<HTMLDivElement | null>(null);
   const vantaRef = useRef<{ destroy: () => void } | null>(null);
+  const prePortalAudioTriggeredRef = useRef(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -211,6 +213,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
       if (!next) {
         setRightPageFlipped(false);
         setTurnedRightPages(0);
+        prePortalAudioTriggeredRef.current = false;
       }
       return next;
     });
@@ -219,6 +222,13 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
   const handleRightPageClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     if (!bookOpen || rightPageFlipped || isFinalPassage || portalSummoned) return;
+    if (
+      turnedRightPages === RIGHT_PAGE_PASSAGES.length - 2 &&
+      !prePortalAudioTriggeredRef.current
+    ) {
+      prePortalAudioTriggeredRef.current = true;
+      void startAmbient();
+    }
     setRightPageFlipped(true);
   };
 
@@ -261,6 +271,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
     (event: React.MouseEvent<HTMLDivElement>) => {
       event.stopPropagation();
       event.preventDefault();
+      void startAmbient();
       triggerAscend();
     },
     [triggerAscend]
@@ -271,6 +282,7 @@ export default function BookPortal({ onAscend }: BookPortalProps) {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
         event.stopPropagation();
+        void startAmbient();
         triggerAscend();
       }
     },

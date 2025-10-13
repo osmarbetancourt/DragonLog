@@ -16,7 +16,7 @@ const getRandomGlyph = () => GLYPH_SOURCE[Math.floor(Math.random() * GLYPH_SOURC
 export default function RuneDecodeText({
   text,
   duration = 1400,
-  revealDelay = 0,
+  revealDelay = 100,
   className,
 }: RuneDecodeTextProps) {
   const characters = useMemo(() => text.split(""), [text]);
@@ -38,8 +38,9 @@ export default function RuneDecodeText({
 
     const shuffled = [...indices].sort(() => Math.random() - 0.5);
     const working = characters.map(char => (char === " " ? " " : getRandomGlyph()));
-    let settledCount = 0;
-    let start = 0;
+  let settledCount = 0;
+  let start = 0;
+  let lastScramble = 0;
 
     const animate = (timestamp: number) => {
       if (!start) {
@@ -47,7 +48,8 @@ export default function RuneDecodeText({
       }
 
       const elapsed = timestamp - start;
-      const progress = Math.min(1, elapsed / duration);
+      const linear = Math.min(1, elapsed / duration);
+      const progress = 1 - Math.pow(1 - linear, 2.2);
       const targetSettled = Math.floor(progress * shuffled.length);
 
       for (let i = settledCount; i < targetSettled; i += 1) {
@@ -56,11 +58,14 @@ export default function RuneDecodeText({
       }
       settledCount = targetSettled;
 
-      for (let i = settledCount; i < shuffled.length; i += 1) {
-        const scrambleIndex = shuffled[i];
-        if (characters[scrambleIndex] !== " ") {
-          working[scrambleIndex] = getRandomGlyph();
+      if (timestamp - lastScramble > 80) {
+        for (let i = settledCount; i < shuffled.length; i += 1) {
+          const scrambleIndex = shuffled[i];
+          if (characters[scrambleIndex] !== " ") {
+            working[scrambleIndex] = getRandomGlyph();
+          }
         }
+        lastScramble = timestamp;
       }
 
       setDisplay(working.join(""));
