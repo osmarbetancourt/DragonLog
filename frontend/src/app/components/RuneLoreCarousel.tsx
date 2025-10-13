@@ -213,11 +213,19 @@ const RuneLoreCarousel: React.FC = () => {
           position: relative;
           width: 100%;
           height: 100%;
-          border-radius: 22px;
-          overflow: hidden;
           transform-style: preserve-3d;
           transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
           box-shadow: 0 24px 48px rgba(0,0,0,0.35);
+          border-radius: 22px;
+          --card-thickness: 6px;
+        }
+        .rune-card-frame {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+          overflow: hidden;
+          transform-style: preserve-3d;
         }
         .rune-card-inner.is-flipped {
           transform: rotateY(180deg);
@@ -228,10 +236,14 @@ const RuneLoreCarousel: React.FC = () => {
           padding: clamp(1.6rem, 4vw, 2.4rem);
           display: grid;
           gap: clamp(1rem, 2.2vw, 1.5rem);
-          background: linear-gradient(160deg, rgba(26,18,34,0.92), rgba(12,8,18,0.94));
+          border-radius: inherit;
+          background: linear-gradient(160deg, #1a1222, #0c0812);
           border: 1px solid rgba(215,180,140,0.32);
           backface-visibility: hidden;
           transform-style: preserve-3d;
+        }
+        .rune-card-face.front {
+          transform: translateZ(0.4px);
         }
         .rune-card-face h4 {
           margin: 0;
@@ -256,11 +268,11 @@ const RuneLoreCarousel: React.FC = () => {
           justify-content: center;
           align-content: center;
           text-align: center;
-          transform: rotateY(180deg);
+          transform: rotateY(180deg) translateZ(calc(var(--card-thickness) * -0.5));
           background:
-            radial-gradient(circle at 32% 22%, rgba(255,214,174,0.32), transparent 62%),
-            radial-gradient(circle at 68% 72%, rgba(210,142,90,0.22), transparent 68%),
-            linear-gradient(150deg, rgba(62,28,20,0.94), rgba(18,8,12,0.95));
+            radial-gradient(circle at 32% 22%, rgba(255,214,174,0.42), transparent 62%),
+            radial-gradient(circle at 68% 72%, rgba(210,142,90,0.32), transparent 68%),
+            linear-gradient(150deg, #3e1c14, #12080c);
           border: 1px solid rgba(240,198,150,0.42);
           box-shadow: inset 0 0 28px rgba(255,210,170,0.2);
           gap: clamp(1.1rem, 2.4vw, 1.6rem);
@@ -274,9 +286,20 @@ const RuneLoreCarousel: React.FC = () => {
           border-radius: 26px;
           background:
             radial-gradient(circle at 32% 28%, rgba(255,236,200,0.4), transparent 70%),
-            linear-gradient(160deg, rgba(64,22,16,0.92), rgba(18,6,10,0.96));
+            linear-gradient(160deg, #401610, #12060a);
           border: 1px solid rgba(255,220,178,0.6);
           box-shadow: inset 0 0 26px rgba(255,214,170,0.32), 0 22px 40px rgba(0,0,0,0.42);
+          transform: translateZ(0.5px);
+        }
+        .rune-card-back-emblem::before {
+          /* Render emblem via CSS background to avoid transform stacking quirks */
+          content: "";
+          position: absolute;
+          inset: 14%;
+          background: url('/images/DragonLog_Logo_WBG.svg') center/contain no-repeat;
+          filter: drop-shadow(0 0 24px rgba(255,216,170,0.75));
+          z-index: 1;
+          transform: translateZ(0.5px);
         }
         .rune-card-back-emblem::after {
           content: "";
@@ -286,10 +309,7 @@ const RuneLoreCarousel: React.FC = () => {
           border: 1px solid rgba(255,236,206,0.65);
           box-shadow: 0 0 18px rgba(255,226,186,0.5);
           opacity: 0.8;
-        }
-        .rune-card-back-emblem img {
-          width: 72%;
-          filter: drop-shadow(0 0 24px rgba(255,216,170,0.75));
+          z-index: 0;
         }
         .rune-card-face.back p {
           font-size: clamp(0.9rem, 1.8vw, 1.08rem);
@@ -386,17 +406,17 @@ const RuneLoreCarousel: React.FC = () => {
               onClick={() => handleCardClick(index)}
             >
               <div className={`rune-card-inner${flipped ? " is-flipped" : ""}`}>
-                <div className="rune-card-face front">
-                  <span>{card.sigil}</span>
-                  <h4>{card.title}</h4>
-                  <p>{card.incantation}</p>
-                  <p>{card.lore}</p>
-                </div>
-                <div className="rune-card-face back">
-                  <div className="rune-card-back-emblem" aria-hidden="true">
-                    <img src="/images/DragonLog_Logo_WBG.svg" alt="" loading="lazy" />
+                <div className="rune-card-frame">
+                  <div className="rune-card-face front">
+                    <span>{card.sigil}</span>
+                    <h4>{card.title}</h4>
+                    <p>{card.incantation}</p>
+                    {card.lore && <p>{card.lore}</p>}
                   </div>
-                  <p>Tap to unseal the rune&apos;s tale.</p>
+                  <div className="rune-card-face back">
+                    <div className="rune-card-back-emblem" aria-hidden="true"></div>
+                    <p>Tap to unseal the rune&apos;s tale.</p>
+                  </div>
                 </div>
               </div>
             </div>
