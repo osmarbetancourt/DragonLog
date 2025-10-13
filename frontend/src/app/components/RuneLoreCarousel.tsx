@@ -254,11 +254,14 @@ const RuneLoreCarousel: React.FC = () => {
           font-family: 'Old Charlotte', serif;
           letter-spacing: 0.12em;
           font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+          color: #2A1D1A;
+          text-shadow: 0 0 8px rgba(20,10,6,0.36);
         }
         .rune-card-face p {
           margin: 0;
           line-height: 1.75;
-          color: rgba(245,228,204,0.85);
+          color: #2A1D1A;
+          text-shadow: 0 0 8px rgba(20,10,6,0.36);
           font-size: clamp(0.92rem, 1.8vw, 1.1rem);
         }
         .rune-card-face .rune-card-glyph {
@@ -268,8 +271,8 @@ const RuneLoreCarousel: React.FC = () => {
           font-family: 'Old Charlotte', serif;
           font-size: clamp(1.25rem, 3vw, 2.1rem);
           letter-spacing: 0.18em;
-          color: rgba(245,226,198,0.92);
-          text-shadow: 0 0 10px rgba(20,10,6,0.46);
+          color: #2A1D1A;
+          text-shadow: 0 0 8px rgba(20,10,6,0.36);
         }
         .rune-card-face.back {
           transform: rotateY(180deg);
