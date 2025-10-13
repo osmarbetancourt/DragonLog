@@ -398,7 +398,7 @@ export default function LandingShowcase() {
           font-family: 'Old Charlotte', serif;
           font-size: clamp(2.8rem, 6vw, 5.2rem);
           letter-spacing: 0.12em;
-          text-transform: uppercase;
+          text-transform: none;
           text-shadow: 0 0 22px rgba(255,196,120,0.55);
           line-height: clamp(1.15, 3vw, 1.28);
           margin: 0;
@@ -424,7 +424,7 @@ export default function LandingShowcase() {
           border-radius: 999px;
           padding: 0.85rem 2.8rem;
           text-decoration: none;
-          text-transform: uppercase;
+          text-transform: none;
           font-family: 'Old Charlotte', serif;
           letter-spacing: 0.08em;
           transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
@@ -563,7 +563,7 @@ export default function LandingShowcase() {
         }
         .journey-banner h3 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.1em;
           font-size: clamp(1.8rem, 4vw, 2.8rem);
           margin: 0;
@@ -583,7 +583,7 @@ export default function LandingShowcase() {
           padding: 0.65rem 1.8rem;
           border-radius: 999px;
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.08em;
           font-size: clamp(0.95rem, 1.8vw, 1.1rem);
           color: rgba(25,12,6,0.92);
@@ -753,7 +753,7 @@ export default function LandingShowcase() {
         }
         .product-copy h3 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.08em;
           font-size: clamp(1.4rem, 2.6vw, 1.9rem);
         }
@@ -780,7 +780,7 @@ export default function LandingShowcase() {
         }
         .landing-features-header h2 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.1em;
           font-size: clamp(2rem, 4vw, 3rem);
         }
@@ -849,7 +849,7 @@ export default function LandingShowcase() {
         .landing-feature-card h3 {
           font-family: 'Old Charlotte', serif;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
+          text-transform: none;
           margin-bottom: 1rem;
           font-size: clamp(1.2rem, 2.3vw, 1.6rem);
         }
@@ -879,7 +879,7 @@ export default function LandingShowcase() {
         }
         .tech-stack-header h2 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.1em;
           font-size: clamp(1.9rem, 3.8vw, 2.8rem);
         }
@@ -916,7 +916,7 @@ export default function LandingShowcase() {
         }
         .tech-card h3 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.08em;
           font-size: clamp(1.2rem, 2.4vw, 1.6rem);
         }
@@ -937,7 +937,7 @@ export default function LandingShowcase() {
           border: 1px solid rgba(215,180,120,0.32);
           background: rgba(18,12,26,0.8);
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.08em;
           color: rgba(245,228,204,0.78);
           box-shadow: 0 10px 24px rgba(0,0,0,0.3);
@@ -984,7 +984,7 @@ export default function LandingShowcase() {
         }
         .rune-archive-shell h2 {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.1em;
           font-size: clamp(1.9rem, 4vw, 2.9rem);
           margin: 0;
@@ -1000,7 +1000,7 @@ export default function LandingShowcase() {
         }
         .rune-archive-hint {
           justify-self: center;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.12em;
           font-size: clamp(0.82rem, 1.4vw, 0.98rem);
           color: rgba(240,214,180,0.72);
@@ -1075,7 +1075,7 @@ export default function LandingShowcase() {
         .cta-card h3 {
           font-family: 'Old Charlotte', serif;
           letter-spacing: 0.1em;
-          text-transform: uppercase;
+          text-transform: none;
           font-size: clamp(1.5rem, 3vw, 2.2rem);
           margin: 0;
         }
@@ -1093,7 +1093,7 @@ export default function LandingShowcase() {
           padding: 0.7rem 2.1rem;
           border-radius: 999px;
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.08em;
           font-size: clamp(0.92rem, 1.7vw, 1.08rem);
           color: rgba(22,10,6,0.92);
@@ -1142,7 +1142,7 @@ export default function LandingShowcase() {
           font-family: 'Old Charlotte', serif;
           font-size: clamp(1.8rem, 3.6vw, 2.6rem);
           letter-spacing: 0.1em;
-          text-transform: uppercase;
+          text-transform: none;
           margin-bottom: 1.4rem;
         }
         .lore-panel p {
@@ -1160,7 +1160,7 @@ export default function LandingShowcase() {
         }
         .landing-footer p {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.12em;
           font-size: clamp(1.1rem, 2.2vw, 1.4rem);
           color: rgba(245,228,206,0.82);
@@ -1176,7 +1176,7 @@ export default function LandingShowcase() {
           color: rgba(245,228,204,0.86);
           font-family: 'Old Charlotte', serif;
           letter-spacing: 0.08em;
-          text-transform: uppercase;
+          text-transform: none;
           cursor: pointer;
           box-shadow: 0 12px 28px rgba(0,0,0,0.35);
           transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;

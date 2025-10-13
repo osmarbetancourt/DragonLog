@@ -91,7 +91,7 @@ export default function TransitionVeil({ onComplete }: TransitionVeilProps) {
         }
         .transition-sigil {
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
+          text-transform: none;
           letter-spacing: 0.12em;
           font-size: clamp(18px, 2.4vw, 42px);
           color: rgba(255,224,180,0.9);

@@ -229,7 +229,7 @@ const RuneLoreCarousel: React.FC = () => {
           display: grid;
           gap: clamp(1rem, 2.2vw, 1.5rem);
           border-radius: inherit;
-          background: linear-gradient(160deg, #1a1222, #0c0812);
+          background: #3b2b1f;
           border: 1px solid rgba(215,180,140,0.32);
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
@@ -237,11 +237,13 @@ const RuneLoreCarousel: React.FC = () => {
         }
         .rune-card-face.front {
           transform: rotateY(0deg);
+          background: url('/images/DragonLogCardFront.png') center/cover no-repeat;
+          background-size: calc(100% + 6px) calc(100% + 6px);
+          background-position: center;
         }
         .rune-card-face h4 {
           margin: 0;
           font-family: 'Old Charlotte', serif;
-          text-transform: uppercase;
           letter-spacing: 0.12em;
           font-size: clamp(1.15rem, 2.4vw, 1.6rem);
         }
@@ -255,7 +257,6 @@ const RuneLoreCarousel: React.FC = () => {
           font-size: clamp(0.82rem, 1.6vw, 1rem);
           letter-spacing: 0.08em;
           color: rgba(245,226,198,0.72);
-          text-transform: uppercase;
         }
         .rune-card-face.back {
           transform: rotateY(180deg);
@@ -303,17 +304,6 @@ const RuneLoreCarousel: React.FC = () => {
         }
         .rune-card.is-active .rune-card-inner {
           box-shadow: 0 28px 62px rgba(255,186,120,0.28);
-        }
-        .rune-card.is-active .rune-card-face.front::before {
-          opacity: 0.32;
-        }
-        .rune-card-face.front::before {
-          content: "";
-          position: absolute;
-          inset: -18%;
-          background: radial-gradient(circle at 30% 30%, rgba(255,206,156,0.14), transparent 60%);
-          opacity: 0.1;
-          pointer-events: none;
         }
         .rune-carousel-indicator {
           position: absolute;
