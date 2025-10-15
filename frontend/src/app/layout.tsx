@@ -30,16 +30,13 @@ export const metadata: Metadata = {
     "DragonLog keeps every shard under watch, weaving observability, alerting, and integrations into a living spellbook for your infrastructure.",
   icons: {
     icon: [
-      { url: "/images/DragonLog_icon_WBG.svg" },
-      { url: "/favicon.ico" },
+      { url: "/images/DragonLog_icon_WBG.svg" }
     ],
     shortcut: [
-      { url: "/images/DragonLog_icon_WBG.svg" },
-      { url: "/favicon.ico" },
+      { url: "/images/DragonLog_icon_WBG.svg" }
     ],
     apple: [
-      { url: "/images/DragonLog_icon_WBG.svg" },
-      { url: "/apple-touch-icon.png" },
+      { url: "/images/DragonLog_icon_WBG.svg" }
     ],
   },
   openGraph: {

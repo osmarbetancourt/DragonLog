@@ -1,9 +1,6 @@
 name: Deploy to Hetzner
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 env:
@@ -16,7 +13,6 @@ jobs:
   deploy:
     name: Deploy DragonLog
     runs-on: ubuntu-latest
-    if: env.HETZNER_HOST != ''
 
     steps:
       - name: Checkout repository
